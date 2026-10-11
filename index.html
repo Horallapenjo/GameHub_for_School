@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GamesHub | Pick Your Game</title>
+    <title>GamesHub | Arcade</title>
     <meta
       name="description"
-      content="GamesHub is a polished arcade of idle and reflex-based mini-games built for quick school breaks and short play sessions."
+      content="GamesHub features real 2D browser games with polished visuals, progression, and arcade-style gameplay."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="background-orb orb-one"></div>
-    <div class="background-orb orb-two"></div>
-
     <div class="page-shell">
       <header class="topbar">
         <div class="brand-wrap">
@@ -27,208 +24,85 @@
           </div>
         </div>
         <div class="top-actions">
-          <span class="status-pill" id="statusPill">Break ready</span>
-          <button class="reset-btn" id="resetAll">Reset save</button>
+          <span class="status-pill">Open beta</span>
+          <button class="primary-btn" id="resetAll">Reset progress</button>
         </div>
       </header>
 
       <section class="hero-panel">
         <div class="hero-copy">
-          <p class="section-tag">Quick play. Long loops.</p>
-          <h2>Choose your next 5-minute obsession.</h2>
+          <p class="section-tag">Playable web classics</p>
+          <h2>Real 2D game experiences built for the browser.</h2>
           <p>
-            A polished collection of idle clickers, reflex challenges, and resource builders designed for short school breaks and addictive grind sessions.
+            Three polished mini-games with arcade scoring, progression, and quick-run gameplay — built for school breaks and longer sessions.
           </p>
         </div>
         <div class="hero-metrics">
           <div class="metric-card">
             <span class="metric-label">Games</span>
-            <strong>5</strong>
+            <strong>3</strong>
           </div>
-          <div class="metric-card">
-            <span class="metric-label">Modes</span>
-            <strong>Idle + Reflex</strong>
+          <div class="metric-label-box">
+            <span class="metric-label">Style</span>
+            <strong>Canvas 2D</strong>
           </div>
           <div class="metric-card">
             <span class="metric-label">Best for</span>
-            <strong>5–90 min</strong>
+            <strong>5–30 min</strong>
           </div>
         </div>
       </section>
 
       <nav class="game-picker" aria-label="Game selection">
-        <button class="game-link active" data-game="clicker">
-          <span class="dot gold"></span>
-          Pixel Tap
-        </button>
-        <button class="game-link" data-game="miner">
-          <span class="dot cyan"></span>
-          Ore Rush
-        </button>
-        <button class="game-link" data-game="forge">
-          <span class="dot pink"></span>
-          Star Forge
-        </button>
-        <button class="game-link" data-game="memory">
-          <span class="dot green"></span>
-          Memory Match
-        </button>
-        <button class="game-link" data-game="reflex">
-          <span class="dot orange"></span>
-          Reflex Rush
-        </button>
+        <button class="game-link active" data-game="hopper">Sky Hopper</button>
+        <button class="game-link" data-game="blaster">Orbit Blaster</button>
+        <button class="game-link" data-game="breaker">Breakout</button>
       </nav>
 
       <main class="game-shell">
-        <section class="game-panel active" data-game-panel="clicker">
+        <section class="game-panel active" data-panel="hopper">
           <div class="panel-top">
             <div>
-              <p class="mini-label">Idle clicker</p>
-              <h3>Pixel Tap</h3>
+              <p class="mini-label">Platform runner</p>
+              <h3>Sky Hopper</h3>
             </div>
-            <span class="panel-badge">Boost</span>
-          </div>
-
-          <div class="game-body clicker-layout">
-            <button class="tap-button" id="pixelButton" aria-label="Tap pixel to gain pixels">
-              <span class="tap-core"></span>
-            </button>
-
-            <div class="stat-column">
-              <div class="stat-box">
-                <span>Pixels</span>
-                <strong id="pixelCount">0</strong>
-              </div>
-              <div class="stat-box">
-                <span>Per tap</span>
-                <strong id="pixelPerTap">1</strong>
-              </div>
-              <div class="stat-box">
-                <span>Auto / sec</span>
-                <strong id="pixelAutoRate">0</strong>
-              </div>
+            <div class="hud-row">
+              <span>Score <strong id="hopper-score">0</strong></span>
+              <span>Best <strong id="hopper-best">0</strong></span>
             </div>
           </div>
-
-          <div class="upgrade-stack">
-            <button class="upgrade-btn" data-game="clicker" data-upgrade="click">
-              Upgrade Tap <span id="pixelClickUpgradeCost">10</span>
-            </button>
-            <button class="upgrade-btn" data-game="clicker" data-upgrade="auto">
-              Auto Tap <span id="pixelAutoUpgradeCost">25</span>
-            </button>
-          </div>
+          <canvas id="hopper-canvas" width="960" height="540" aria-label="Sky Hopper game canvas"></canvas>
+          <p class="instructions">Jump with Space, W, or a click/tap. Survive as long as possible.</p>
         </section>
 
-        <section class="game-panel" data-game-panel="miner">
+        <section class="game-panel" data-panel="blaster">
           <div class="panel-top">
             <div>
-              <p class="mini-label">Idle miner</p>
-              <h3>Ore Rush</h3>
+              <p class="mini-label">Shooter</p>
+              <h3>Orbit Blaster</h3>
             </div>
-            <span class="panel-badge">Mining</span>
-          </div>
-
-          <div class="game-body miner-layout">
-            <div class="mine-visual">⛏</div>
-            <div class="stat-column">
-              <div class="stat-box">
-                <span>Ore</span>
-                <strong id="oreCount">0</strong>
-              </div>
-              <div class="stat-box">
-                <span>Workers</span>
-                <strong id="minerWorkers">0</strong>
-              </div>
-              <div class="stat-box">
-                <span>Ore / sec</span>
-                <strong id="orePerSecond">0</strong>
-              </div>
+            <div class="hud-row">
+              <span>Score <strong id="blaster-score">0</strong></span>
+              <span>HP <strong id="blaster-hp">5</strong></span>
             </div>
           </div>
-
-          <div class="upgrade-stack">
-            <button class="upgrade-btn" data-game="miner" data-upgrade="worker">
-              Hire Miner <span id="minerWorkerCost">15</span>
-            </button>
-            <button class="upgrade-btn" data-game="miner" data-upgrade="drill">
-              Drill Upgrade <span id="minerDrillCost">80</span>
-            </button>
-          </div>
+          <canvas id="blaster-canvas" width="960" height="540" aria-label="Orbit Blaster game canvas"></canvas>
+          <p class="instructions">Move with WASD, shoot with Space or click the canvas.</p>
         </section>
 
-        <section class="game-panel" data-game-panel="forge">
+        <section class="game-panel" data-panel="breaker">
           <div class="panel-top">
             <div>
-              <p class="mini-label">Idle builder</p>
-              <h3>Star Forge</h3>
+              <p class="mini-label">Arcade classic</p>
+              <h3>Breakout</h3>
             </div>
-            <span class="panel-badge">Heat</span>
-          </div>
-
-          <div class="game-body forge-layout">
-            <div class="forge-visual">✦</div>
-            <div class="stat-column">
-              <div class="stat-box">
-                <span>Flux</span>
-                <strong id="fluxCount">0</strong>
-              </div>
-              <div class="stat-box">
-                <span>Smelters</span>
-                <strong id="forgeSmelters">0</strong>
-              </div>
-              <div class="stat-box">
-                <span>Flux / sec</span>
-                <strong id="fluxPerSecond">0</strong>
-              </div>
+            <div class="hud-row">
+              <span>Score <strong id="breaker-score">0</strong></span>
+              <span>Lives <strong id="breaker-lives">3</strong></span>
             </div>
           </div>
-
-          <div class="upgrade-stack">
-            <button class="upgrade-btn" data-game="forge" data-upgrade="smelter">
-              Add Smelter <span id="forgeSmelterCost">20</span>
-            </button>
-            <button class="upgrade-btn" data-game="forge" data-upgrade="bot">
-              Auto Bot <span id="forgeBotCost">90</span>
-            </button>
-          </div>
-        </section>
-
-        <section class="game-panel" data-game-panel="memory">
-          <div class="panel-top">
-            <div>
-              <p class="mini-label">Pattern puzzle</p>
-              <h3>Memory Match</h3>
-            </div>
-            <span class="panel-badge">Pairs</span>
-          </div>
-
-          <div class="memory-box">
-            <div class="memory-header">
-              <span>Moves: <strong id="memoryMoves">0</strong></span>
-              <span>Pairs: <strong id="memoryPairs">0/8</strong></span>
-            </div>
-            <div class="memory-grid" id="memoryGrid"></div>
-          </div>
-        </section>
-
-        <section class="game-panel" data-game-panel="reflex">
-          <div class="panel-top">
-            <div>
-              <p class="mini-label">Reaction game</p>
-              <h3>Reflex Rush</h3>
-            </div>
-            <span class="panel-badge">Speed</span>
-          </div>
-
-          <div class="reflex-wrap">
-            <div class="reflex-status" id="reflexStatus">Ready</div>
-            <button class="reflex-button" id="reflexButton">Wait for green</button>
-            <div class="reflex-score">
-              <span>Best</span>
-              <strong id="reflexBest">0ms</strong>
-            </div>
-          </div>
+          <canvas id="breaker-canvas" width="960" height="540" aria-label="Breakout game canvas"></canvas>
+          <p class="instructions">Move with A/D or the mouse. Break every brick to win.</p>
         </section>
       </main>
     </div>
