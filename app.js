@@ -17,6 +17,11 @@ const ui = {
 };
 
 const localBestKey = 'gameshub-best-v2';
+const safeText = (element, value) => {
+  if (element) {
+    element.textContent = value;
+  }
+};
 const bestScores = {
   hopper: Number(localStorage.getItem(localBestKey + '-hopper') || 0),
   blaster: Number(localStorage.getItem(localBestKey + '-blaster') || 0),
@@ -111,10 +116,14 @@ function updateBest(kind, value) {
 function setActiveGame(gameName) {
   gameState.active = gameName;
   ui.gameLinks.forEach((button) => {
-    button.classList.toggle('active', button.dataset.game === gameName);
+    if (button) {
+      button.classList.toggle('active', button.dataset.game === gameName);
+    }
   });
   ui.gamePanels.forEach((panel) => {
-    panel.classList.toggle('active', panel.dataset.panel === gameName);
+    if (panel) {
+      panel.classList.toggle('active', panel.dataset.panel === gameName);
+    }
   });
 }
 
@@ -180,8 +189,8 @@ function updateHopper(dt) {
   }
 
   hopper.score += dt * 26;
-  ui.hopperScore.textContent = Math.floor(hopper.score);
-  ui.hopperBest.textContent = Math.floor(hopper.best);
+  safeText(ui.hopperScore, Math.floor(hopper.score));
+  safeText(ui.hopperBest, Math.floor(hopper.best));
 }
 
 function drawHopper() {
@@ -349,8 +358,8 @@ function updateBlaster(dt) {
     updateBest('blaster', blaster.score);
   }
 
-  ui.blasterScore.textContent = blaster.score;
-  ui.blasterHp.textContent = player.hp;
+  safeText(ui.blasterScore, blaster.score);
+  safeText(ui.blasterHp, player.hp);
 }
 
 function drawBlaster() {
@@ -489,8 +498,8 @@ function updateBreaker(dt) {
     }
   }
 
-  ui.breakerScore.textContent = breaker.score;
-  ui.breakerLives.textContent = breaker.lives;
+  safeText(ui.breakerScore, breaker.score);
+  safeText(ui.breakerLives, breaker.lives);
 }
 
 function drawBreaker() {
@@ -538,12 +547,12 @@ function resetAllGames() {
   resetHopper();
   resetBlaster();
   resetBreakout();
-  ui.hopperScore.textContent = 0;
-  ui.hopperBest.textContent = bestScores.hopper;
-  ui.blasterScore.textContent = 0;
-  ui.blasterHp.textContent = 5;
-  ui.breakerScore.textContent = 0;
-  ui.breakerLives.textContent = 3;
+  safeText(ui.hopperScore, 0);
+  safeText(ui.hopperBest, bestScores.hopper);
+  safeText(ui.blasterScore, 0);
+  safeText(ui.blasterHp, 5);
+  safeText(ui.breakerScore, 0);
+  safeText(ui.breakerLives, 3);
 }
 
 function restartFromKey() {
@@ -582,37 +591,44 @@ function handleKeyUp(event) {
 
 function bindCanvasInput() {
   Object.values(canvasIds).forEach((canvas) => {
+    if (!canvas) return;
     canvas.addEventListener('pointerdown', () => {
       if (gameState.active === 'hopper') handleJump();
       if (gameState.active === 'blaster') fireBlasterBullet();
     });
   });
 
-  canvasIds.blaster.addEventListener('pointermove', (event) => {
-    const rect = canvasIds.blaster.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * canvasIds.blaster.width;
-    const y = ((event.clientY - rect.top) / rect.height) * canvasIds.blaster.height;
-    if (gameState.blaster) {
-      gameState.blaster.mouse.x = x;
-      gameState.blaster.mouse.y = y;
-    }
-  });
+  if (canvasIds.blaster) {
+    canvasIds.blaster.addEventListener('pointermove', (event) => {
+      const rect = canvasIds.blaster.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * canvasIds.blaster.width;
+      const y = ((event.clientY - rect.top) / rect.height) * canvasIds.blaster.height;
+      if (gameState.blaster) {
+        gameState.blaster.mouse.x = x;
+        gameState.blaster.mouse.y = y;
+      }
+    });
+  }
 }
 
 function bindUI() {
   ui.gameLinks.forEach((button) => {
-    button.addEventListener('click', () => setActiveGame(button.dataset.game));
+    if (button) {
+      button.addEventListener('click', () => setActiveGame(button.dataset.game));
+    }
   });
 
-  ui.resetAll.addEventListener('click', () => {
-    bestScores.hopper = 0;
-    bestScores.blaster = 0;
-    bestScores.breaker = 0;
-    localStorage.setItem(localBestKey + '-hopper', '0');
-    localStorage.setItem(localBestKey + '-blaster', '0');
-    localStorage.setItem(localBestKey + '-breaker', '0');
-    resetAllGames();
-  });
+  if (ui.resetAll) {
+    ui.resetAll.addEventListener('click', () => {
+      bestScores.hopper = 0;
+      bestScores.blaster = 0;
+      bestScores.breaker = 0;
+      localStorage.setItem(localBestKey + '-hopper', '0');
+      localStorage.setItem(localBestKey + '-blaster', '0');
+      localStorage.setItem(localBestKey + '-breaker', '0');
+      resetAllGames();
+    });
+  }
 }
 
 let lastFrame = 0;
