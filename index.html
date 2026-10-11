@@ -3,45 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GamesHub Arcade</title>
+    <title>GamesHub | Pick Your Game</title>
     <meta
       name="description"
-      content="A collection of tiny idle pixel games for quick 5-15 minute sessions."
+      content="GamesHub is a polished arcade of idle and reflex-based mini-games built for quick school breaks and short play sessions."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
     <div class="page-shell">
       <header class="topbar">
-        <div>
-          <p class="eyebrow">Web-Games</p>
-          <h1>GamesHub Arcade</h1>
+        <div class="brand-wrap">
+          <div class="logo-mark">GH</div>
+          <div>
+            <p class="eyebrow">Arcade hub</p>
+            <h1>GamesHub</h1>
+          </div>
         </div>
-        <button class="reset-btn" id="resetAll">Reset all progress</button>
+        <div class="top-actions">
+          <span class="status-pill" id="statusPill">Break ready</span>
+          <button class="reset-btn" id="resetAll">Reset save</button>
+        </div>
       </header>
 
-      <main class="hub-grid">
-        <section class="game-card glow-gold" id="pixelClickerSection">
-          <div class="card-header">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <p class="section-tag">Quick play. Long loops.</p>
+          <h2>Choose your next 5-minute obsession.</h2>
+          <p>
+            A polished collection of idle clickers, reflex challenges, and resource builders designed for short school breaks and addictive grind sessions.
+          </p>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <span class="metric-label">Games</span>
+            <strong>5</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Modes</span>
+            <strong>Idle + Reflex</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Best for</span>
+            <strong>5–90 min</strong>
+          </div>
+        </div>
+      </section>
+
+      <nav class="game-picker" aria-label="Game selection">
+        <button class="game-link active" data-game="clicker">
+          <span class="dot gold"></span>
+          Pixel Tap
+        </button>
+        <button class="game-link" data-game="miner">
+          <span class="dot cyan"></span>
+          Ore Rush
+        </button>
+        <button class="game-link" data-game="forge">
+          <span class="dot pink"></span>
+          Star Forge
+        </button>
+        <button class="game-link" data-game="memory">
+          <span class="dot green"></span>
+          Memory Match
+        </button>
+        <button class="game-link" data-game="reflex">
+          <span class="dot orange"></span>
+          Reflex Rush
+        </button>
+      </nav>
+
+      <main class="game-shell">
+        <section class="game-panel active" data-game-panel="clicker">
+          <div class="panel-top">
             <div>
               <p class="mini-label">Idle clicker</p>
-              <h2>Pixel Tap</h2>
+              <h3>Pixel Tap</h3>
             </div>
-            <span class="badge">∞</span>
+            <span class="panel-badge">Boost</span>
           </div>
 
-          <button class="pixel-button" id="pixelButton" aria-label="Tap pixel to gain pixels">
-            <span class="pixel-core"></span>
-          </button>
+          <div class="game-body clicker-layout">
+            <button class="tap-button" id="pixelButton" aria-label="Tap pixel to gain pixels">
+              <span class="tap-core"></span>
+            </button>
 
-          <div class="stats-row">
-            <div>
-              <span class="stat-label">Pixels</span>
-              <strong id="pixelCount">0</strong>
-            </div>
-            <div>
-              <span class="stat-label">Per tap</span>
-              <strong id="pixelPerTap">1</strong>
+            <div class="stat-column">
+              <div class="stat-box">
+                <span>Pixels</span>
+                <strong id="pixelCount">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Per tap</span>
+                <strong id="pixelPerTap">1</strong>
+              </div>
+              <div class="stat-box">
+                <span>Auto / sec</span>
+                <strong id="pixelAutoRate">0</strong>
+              </div>
             </div>
           </div>
 
@@ -55,31 +120,30 @@
           </div>
         </section>
 
-        <section class="game-card glow-cyan" id="idleMinerSection">
-          <div class="card-header">
+        <section class="game-panel" data-game-panel="miner">
+          <div class="panel-top">
             <div>
               <p class="mini-label">Idle miner</p>
-              <h2>Ore Rush</h2>
+              <h3>Ore Rush</h3>
             </div>
-            <span class="badge">1x</span>
+            <span class="panel-badge">Mining</span>
           </div>
 
-          <div class="hud-box">
-            <div class="ore-visual"><span>⛏</span></div>
-            <div class="ore-meta">
-              <span class="stat-label">Ore</span>
-              <strong id="oreCount">0</strong>
-            </div>
-          </div>
-
-          <div class="stats-row">
-            <div>
-              <span class="stat-label">Workers</span>
-              <strong id="minerWorkers">0</strong>
-            </div>
-            <div>
-              <span class="stat-label">/s</span>
-              <strong id="orePerSecond">0</strong>
+          <div class="game-body miner-layout">
+            <div class="mine-visual">⛏</div>
+            <div class="stat-column">
+              <div class="stat-box">
+                <span>Ore</span>
+                <strong id="oreCount">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Workers</span>
+                <strong id="minerWorkers">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Ore / sec</span>
+                <strong id="orePerSecond">0</strong>
+              </div>
             </div>
           </div>
 
@@ -93,31 +157,30 @@
           </div>
         </section>
 
-        <section class="game-card glow-pink" id="forgeSection">
-          <div class="card-header">
+        <section class="game-panel" data-game-panel="forge">
+          <div class="panel-top">
             <div>
               <p class="mini-label">Idle builder</p>
-              <h2>Star Forge</h2>
+              <h3>Star Forge</h3>
             </div>
-            <span class="badge">⚡</span>
+            <span class="panel-badge">Heat</span>
           </div>
 
-          <div class="hud-box forge-box">
+          <div class="game-body forge-layout">
             <div class="forge-visual">✦</div>
-            <div class="ore-meta">
-              <span class="stat-label">Flux</span>
-              <strong id="fluxCount">0</strong>
-            </div>
-          </div>
-
-          <div class="stats-row">
-            <div>
-              <span class="stat-label">Smelters</span>
-              <strong id="forgeSmelters">0</strong>
-            </div>
-            <div>
-              <span class="stat-label">/s</span>
-              <strong id="fluxPerSecond">0</strong>
+            <div class="stat-column">
+              <div class="stat-box">
+                <span>Flux</span>
+                <strong id="fluxCount">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Smelters</span>
+                <strong id="forgeSmelters">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Flux / sec</span>
+                <strong id="fluxPerSecond">0</strong>
+              </div>
             </div>
           </div>
 
@@ -128,6 +191,43 @@
             <button class="upgrade-btn" data-game="forge" data-upgrade="bot">
               Auto Bot <span id="forgeBotCost">90</span>
             </button>
+          </div>
+        </section>
+
+        <section class="game-panel" data-game-panel="memory">
+          <div class="panel-top">
+            <div>
+              <p class="mini-label">Pattern puzzle</p>
+              <h3>Memory Match</h3>
+            </div>
+            <span class="panel-badge">Pairs</span>
+          </div>
+
+          <div class="memory-box">
+            <div class="memory-header">
+              <span>Moves: <strong id="memoryMoves">0</strong></span>
+              <span>Pairs: <strong id="memoryPairs">0/8</strong></span>
+            </div>
+            <div class="memory-grid" id="memoryGrid"></div>
+          </div>
+        </section>
+
+        <section class="game-panel" data-game-panel="reflex">
+          <div class="panel-top">
+            <div>
+              <p class="mini-label">Reaction game</p>
+              <h3>Reflex Rush</h3>
+            </div>
+            <span class="panel-badge">Speed</span>
+          </div>
+
+          <div class="reflex-wrap">
+            <div class="reflex-status" id="reflexStatus">Ready</div>
+            <button class="reflex-button" id="reflexButton">Wait for green</button>
+            <div class="reflex-score">
+              <span>Best</span>
+              <strong id="reflexBest">0ms</strong>
+            </div>
           </div>
         </section>
       </main>
