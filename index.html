@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GamesHub Arcade</title>
+    <meta
+      name="description"
+      content="A collection of tiny idle pixel games for quick 5-15 minute sessions."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Web-Games</p>
+          <h1>GamesHub Arcade</h1>
+        </div>
+        <button class="reset-btn" id="resetAll">Reset all progress</button>
+      </header>
+
+      <main class="hub-grid">
+        <section class="game-card glow-gold" id="pixelClickerSection">
+          <div class="card-header">
+            <div>
+              <p class="mini-label">Idle clicker</p>
+              <h2>Pixel Tap</h2>
+            </div>
+            <span class="badge">∞</span>
+          </div>
+
+          <button class="pixel-button" id="pixelButton" aria-label="Tap pixel to gain pixels">
+            <span class="pixel-core"></span>
+          </button>
+
+          <div class="stats-row">
+            <div>
+              <span class="stat-label">Pixels</span>
+              <strong id="pixelCount">0</strong>
+            </div>
+            <div>
+              <span class="stat-label">Per tap</span>
+              <strong id="pixelPerTap">1</strong>
+            </div>
+          </div>
+
+          <div class="upgrade-stack">
+            <button class="upgrade-btn" data-game="clicker" data-upgrade="click">
+              Upgrade Tap <span id="pixelClickUpgradeCost">10</span>
+            </button>
+            <button class="upgrade-btn" data-game="clicker" data-upgrade="auto">
+              Auto Tap <span id="pixelAutoUpgradeCost">25</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="game-card glow-cyan" id="idleMinerSection">
+          <div class="card-header">
+            <div>
+              <p class="mini-label">Idle miner</p>
+              <h2>Ore Rush</h2>
+            </div>
+            <span class="badge">1x</span>
+          </div>
+
+          <div class="hud-box">
+            <div class="ore-visual"><span>⛏</span></div>
+            <div class="ore-meta">
+              <span class="stat-label">Ore</span>
+              <strong id="oreCount">0</strong>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div>
+              <span class="stat-label">Workers</span>
+              <strong id="minerWorkers">0</strong>
+            </div>
+            <div>
+              <span class="stat-label">/s</span>
+              <strong id="orePerSecond">0</strong>
+            </div>
+          </div>
+
+          <div class="upgrade-stack">
+            <button class="upgrade-btn" data-game="miner" data-upgrade="worker">
+              Hire Miner <span id="minerWorkerCost">15</span>
+            </button>
+            <button class="upgrade-btn" data-game="miner" data-upgrade="drill">
+              Drill Upgrade <span id="minerDrillCost">80</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="game-card glow-pink" id="forgeSection">
+          <div class="card-header">
+            <div>
+              <p class="mini-label">Idle builder</p>
+              <h2>Star Forge</h2>
+            </div>
+            <span class="badge">⚡</span>
+          </div>
+
+          <div class="hud-box forge-box">
+            <div class="forge-visual">✦</div>
+            <div class="ore-meta">
+              <span class="stat-label">Flux</span>
+              <strong id="fluxCount">0</strong>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div>
+              <span class="stat-label">Smelters</span>
+              <strong id="forgeSmelters">0</strong>
+            </div>
+            <div>
+              <span class="stat-label">/s</span>
+              <strong id="fluxPerSecond">0</strong>
+            </div>
+          </div>
+
+          <div class="upgrade-stack">
+            <button class="upgrade-btn" data-game="forge" data-upgrade="smelter">
+              Add Smelter <span id="forgeSmelterCost">20</span>
+            </button>
+            <button class="upgrade-btn" data-game="forge" data-upgrade="bot">
+              Auto Bot <span id="forgeBotCost">90</span>
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
